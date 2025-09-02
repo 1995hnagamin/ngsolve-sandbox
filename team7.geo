@@ -4,6 +4,7 @@ SetFactory("OpenCASCADE");
     [-1353, 1647] x [-1353, 1647] x [-300, 449] (mm)
 */
 Box(1) = {-1.353, -1.353, -0.300, 3.000, 3.000, 0.749};
+Physical Surface("Outer") = {1, 2, 3, 4, 5, 6};
 
 /*  Aluminum
     294 x 294 x 19 (mm)
