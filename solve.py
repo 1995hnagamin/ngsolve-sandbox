@@ -1,6 +1,6 @@
-from ngsolve import *
+import ngsolve as ngs
 from netgen.read_gmsh import ReadGmsh
 
-mesh = Mesh(ReadGmsh("team7.msh"))
+mesh = ngs.Mesh(ReadGmsh("team7.msh"))
 print(mesh.GetMaterials())
 
