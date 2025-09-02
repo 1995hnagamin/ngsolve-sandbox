@@ -12,18 +12,36 @@ Box(1) = {-1.353, -1.353, -0.300, 3.000, 3.000, 0.749};
 almiLengthX = 0.294;
 almiLengthY = 0.294;
 almiLengthZ = 0.019;
-Box(2) = {0, 0, 0, almiLengthX, almiLengthY, almiLengthZ};
+
+Point(9) = {0, 0, 0, 1.0};
+Point(10) = {almiLengthX, 0, 0, 1.0};
+Point(11) = {almiLengthX, almiLengthY, 0, 1.0};
+Point(12) = {0, almiLengthY, 0, 1.0};
+Line(13) = {9, 10};
+Line(14) = {10, 11};
+Line(15) = {11, 12};
+Line(16) = {12, 9};
+Curve Loop(7) = {13, 14, 15, 16};
 
 almiHoleOffsetX = 0.018;
 almiHoleLengthX = 0.108;
 almiHoleOffsetY = 0.018;
 almiHoleLengthY = 0.108;
-Box(3) = {almiHoleOffsetX, almiHoleOffsetY, 0, almiHoleLengthX, almiHoleLengthY, almiLengthZ};
+Point(13) = {almiHoleOffsetX, almiHoleOffsetY, 0, 1.0};
+Point(14) = {almiHoleOffsetX+almiHoleLengthX, almiHoleOffsetY, 0, 1.0};
+Point(15) = {almiHoleOffsetX+almiHoleLengthX, almiHoleOffsetY+almiHoleLengthY, 0, 1.0};
+Point(16) = {almiHoleOffsetX, almiHoleOffsetY+almiHoleLengthY, 0, 1.0};
+Line(17) = {13, 14};
+Line(18) = {14, 15};
+Line(19) = {15, 16};
+Line(20) = {16, 13};
+Curve Loop(8) = {18, 19, 20, 17};
 
-Almi() = BooleanDifference{ Volume{2}; Delete; }{ Volume{3}; Delete; };
+Plane Surface(7) = {7, 8};
 
-/* Coil
-*/
+Extrude {0, 0, almiLengthZ} {
+  Surface{7}; 
+}
 
 coilAlmiGap = 0.030;
 coilLengthZ = 0.100;
