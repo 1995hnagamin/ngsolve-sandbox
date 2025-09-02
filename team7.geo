@@ -13,10 +13,12 @@ almiLengthX = 0.294;
 almiLengthY = 0.294;
 almiLengthZ = 0.019;
 
-Point(9) = {0, 0, 0, 1.0};
-Point(10) = {almiLengthX, 0, 0, 1.0};
-Point(11) = {almiLengthX, almiLengthY, 0, 1.0};
-Point(12) = {0, almiLengthY, 0, 1.0};
+lc = 1e-2;
+
+Point(9) = {0, 0, 0, lc};
+Point(10) = {almiLengthX, 0, 0, lc};
+Point(11) = {almiLengthX, almiLengthY, 0, lc};
+Point(12) = {0, almiLengthY, 0, lc};
 Line(13) = {9, 10};
 Line(14) = {10, 11};
 Line(15) = {11, 12};
@@ -27,10 +29,10 @@ almiHoleOffsetX = 0.018;
 almiHoleLengthX = 0.108;
 almiHoleOffsetY = 0.018;
 almiHoleLengthY = 0.108;
-Point(13) = {almiHoleOffsetX, almiHoleOffsetY, 0, 1.0};
-Point(14) = {almiHoleOffsetX+almiHoleLengthX, almiHoleOffsetY, 0, 1.0};
-Point(15) = {almiHoleOffsetX+almiHoleLengthX, almiHoleOffsetY+almiHoleLengthY, 0, 1.0};
-Point(16) = {almiHoleOffsetX, almiHoleOffsetY+almiHoleLengthY, 0, 1.0};
+Point(13) = {almiHoleOffsetX, almiHoleOffsetY, 0, lc};
+Point(14) = {almiHoleOffsetX+almiHoleLengthX, almiHoleOffsetY, 0, lc};
+Point(15) = {almiHoleOffsetX+almiHoleLengthX, almiHoleOffsetY+almiHoleLengthY, 0, lc};
+Point(16) = {almiHoleOffsetX, almiHoleOffsetY+almiHoleLengthY, 0, lc};
 Line(17) = {13, 14};
 Line(18) = {14, 15};
 Line(19) = {15, 16};
@@ -47,35 +49,35 @@ coilAlmiGap = 0.030;
 coilLengthZ = 0.100;
 
 //+
-Point(33) = {0.244, 0, 0.049, 1.0};
+Point(33) = {0.244, 0, 0.049, lc};
 //+
-Point(34) = {0.294, 0.050, 0.049, 1.0};
+Point(34) = {0.294, 0.050, 0.049, lc};
 //+
-Point(35) = {0.244, 0.050, 0.049, 1.0};
+Point(35) = {0.244, 0.050, 0.049, lc};
 //+
 Circle(49) = {33, 35, 34};
 //+
-Point(36) = {0.294, 0.150, 0.049, 1.0};
+Point(36) = {0.294, 0.150, 0.049, lc};
 //+
-Point(37) = {0.244, 0.200, 0.049, 1.0};
+Point(37) = {0.244, 0.200, 0.049, lc};
 //+
-Point(38) = {0.244, 0.150, 0.049, 1.0};
+Point(38) = {0.244, 0.150, 0.049, lc};
 //+
 Line(50) = {34, 36};
 //+
 Circle(51) = {36, 38, 37};
 //+
-Point(39) = {0.144, 0.200, 0.049, 1.0};
-Point(40) = {0.094, 0.150, 0.049, 1.0};
-Point(41) = {0.144, 0.150, 0.049, 1.0};
+Point(39) = {0.144, 0.200, 0.049, lc};
+Point(40) = {0.094, 0.150, 0.049, lc};
+Point(41) = {0.144, 0.150, 0.049, lc};
 //+
 Line(52) = {37, 39};
 //+
 Circle(53) = {39, 41, 40};
 
-Point(42) = {0.094, 0.050, 0.049, 1.0};
-Point(43) = {0.144,   0.0, 0.049, 1.0};
-Point(44) = {0.144, 0.050, 0.049, 1.0};
+Point(42) = {0.094, 0.050, 0.049, lc};
+Point(43) = {0.144,   0.0, 0.049, lc};
+Point(44) = {0.144, 0.050, 0.049, lc};
 //+
 Line(54) = {40, 42};
 //+
@@ -85,22 +87,22 @@ Line(56) = {43, 33};
 
 Curve Loop(25) = {56, 49, 50, 51, 52, 53, 54, 55};
 
-Point(45) = {0.244, 0.025, 0.049, 1.0};
-Point(46) = {0.269, 0.050, 0.049, 1.0};
+Point(45) = {0.244, 0.025, 0.049, lc};
+Point(46) = {0.269, 0.050, 0.049, lc};
 Circle(57) = {45, 35, 46};
 
-Point(47) = {0.269, 0.150, 0.049, 1.0};
-Point(48) = {0.244, 0.175, 0.049, 1.0};
+Point(47) = {0.269, 0.150, 0.049, lc};
+Point(48) = {0.244, 0.175, 0.049, lc};
 Line(58) = {46, 47};
 Circle(59) = {47, 38, 48};
 
-Point(49) = {0.144, 0.175, 0.049, 1.0};
-Point(50) = {0.119, 0.150, 0.049, 1.0};
+Point(49) = {0.144, 0.175, 0.049, lc};
+Point(50) = {0.119, 0.150, 0.049, lc};
 Line(60) = {48, 49};
 Circle(61) = {49, 41, 50};
 
-Point(51) = {0.119, 0.050, 0.049, 1.0};
-Point(52) = {0.144, 0.025, 0.049, 1.0};
+Point(51) = {0.119, 0.050, 0.049, lc};
+Point(52) = {0.144, 0.025, 0.049, lc};
 //+
 Line(62) = {50, 51};
 //+
