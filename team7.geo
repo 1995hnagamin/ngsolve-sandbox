@@ -106,4 +106,4 @@ Physical Volume("Alminum", 98) = {2};
 //+
 Physical Volume("Coil", 99) = {3};
 
-Save "team17.step";
+Save "team7.step";
