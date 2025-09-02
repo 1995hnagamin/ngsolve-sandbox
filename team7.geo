@@ -5,34 +5,34 @@ SetFactory("OpenCASCADE");
 */
 Box(1) = {-1.353, -1.353, -0.300, 3.000, 3.000, 0.749};
 
-/*  Alminum
+/*  Aluminum
     294 x 294 x 19 (mm)
     with hole 108 x 108 x 19 (mm)
 */
-almiLengthX = 0.294;
-almiLengthY = 0.294;
-almiLengthZ = 0.019;
+alumiLengthX = 0.294;
+alumiLengthY = 0.294;
+alumiLengthZ = 0.019;
 
 lc = 1e-2;
 
 Point(9) = {0, 0, 0, lc};
-Point(10) = {almiLengthX, 0, 0, lc};
-Point(11) = {almiLengthX, almiLengthY, 0, lc};
-Point(12) = {0, almiLengthY, 0, lc};
+Point(10) = {alumiLengthX, 0, 0, lc};
+Point(11) = {alumiLengthX, alumiLengthY, 0, lc};
+Point(12) = {0, alumiLengthY, 0, lc};
 Line(13) = {9, 10};
 Line(14) = {10, 11};
 Line(15) = {11, 12};
 Line(16) = {12, 9};
 Curve Loop(7) = {13, 14, 15, 16};
 
-almiHoleOffsetX = 0.018;
-almiHoleLengthX = 0.108;
-almiHoleOffsetY = 0.018;
-almiHoleLengthY = 0.108;
-Point(13) = {almiHoleOffsetX, almiHoleOffsetY, 0, lc};
-Point(14) = {almiHoleOffsetX+almiHoleLengthX, almiHoleOffsetY, 0, lc};
-Point(15) = {almiHoleOffsetX+almiHoleLengthX, almiHoleOffsetY+almiHoleLengthY, 0, lc};
-Point(16) = {almiHoleOffsetX, almiHoleOffsetY+almiHoleLengthY, 0, lc};
+alumiHoleOffsetX = 0.018;
+alumiHoleLengthX = 0.108;
+alumiHoleOffsetY = 0.018;
+alumiHoleLengthY = 0.108;
+Point(13) = {alumiHoleOffsetX, alumiHoleOffsetY, 0, lc};
+Point(14) = {alumiHoleOffsetX+alumiHoleLengthX, alumiHoleOffsetY, 0, lc};
+Point(15) = {alumiHoleOffsetX+alumiHoleLengthX, alumiHoleOffsetY+alumiHoleLengthY, 0, lc};
+Point(16) = {alumiHoleOffsetX, alumiHoleOffsetY+alumiHoleLengthY, 0, lc};
 Line(17) = {13, 14};
 Line(18) = {14, 15};
 Line(19) = {15, 16};
@@ -41,11 +41,11 @@ Curve Loop(8) = {18, 19, 20, 17};
 
 Plane Surface(7) = {7, 8};
 
-Extrude {0, 0, almiLengthZ} {
+Extrude {0, 0, alumiLengthZ} {
   Surface{7}; 
 }
 
-coilAlmiGap = 0.030;
+coilAlumiGap = 0.030;
 coilLengthZ = 0.100;
 
 Point(33) = {0.244, 0, 0.049, lc};
@@ -103,7 +103,7 @@ Extrude {0, 0, coilLengthZ} {
 }
 
 Physical Volume("Air", 97) = {1};
-Physical Volume("Alminum", 98) = {2};
+Physical Volume("Aluminum", 98) = {2};
 Physical Volume("Coil", 99) = {3};
 
 Save "team7.step";
