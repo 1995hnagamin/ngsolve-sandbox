@@ -4,7 +4,6 @@ SetFactory("OpenCASCADE");
     [-1353, 1647] x [-1353, 1647] x [-300, 449] (mm)
 */
 Box(1) = {-1.353, -1.353, -0.300, 3.000, 3.000, 0.749};
-Physical Surface("Outer") = {1, 2, 3, 4, 5, 6};
 
 /*  Aluminum
     294 x 294 x 19 (mm)
@@ -103,8 +102,23 @@ Extrude {0, 0, coilLengthZ} {
   Surface{23}; 
 }
 
-Physical Volume("Air", 97) = {1};
-Physical Volume("Aluminum", 98) = {2};
-Physical Volume("Coil", 99) = {3};
+boolflag() = BooleanFragments{ Volume{ 1, 2, 3 }; Delete; }{};
+
+tol = 1e-6;
+
+Aluminum[] = Volume In BoundingBox{0-tol, 0-tol, 0-tol, 0.294+tol, 0.294+tol, 0.019+tol};
+Physical Volume("Aluminum") = {Aluminum[]};
+
+Coil[] = Volume In BoundingBox{0.094-tol, 0-tol, 0.049-tol, 0.294+tol, 0.2+tol, 0.149+tol};
+Physical Volume("Coil") = {Coil[]};
+
+Air[] = Volume "*";
+Air[] -= {Coil[], Aluminum[]};
+Physical Volume("Air") = {Air[]};
+
+surfOuter[] = Abs(Boundary{ Volume{Air[]}; });
+surfOuter[] -= Abs(Boundary{ Volume{Coil[]}; });
+surfOuter[] -= Abs(Boundary{ Volume{Aluminum[]}; });
+Physical Surface("Outer") = {surfOuter[]};
 
 Save "team7.step";
