@@ -36,7 +36,7 @@ with TaskManager():
 
 print(mesh.ne, mesh.nv, mesh.GetMaterials(), mesh.GetBoundaries())
 
-fespot = H1(mesh, order=3, definedon=mesh.Materials("coil"), dirichlet="out")
+fespot = H1(mesh, order=2, definedon=mesh.Materials("coil"), dirichlet="out")
 phi,psi = fespot.TnT()
 sigma = 58.7e6
 with TaskManager():
@@ -47,7 +47,7 @@ with TaskManager():
     gfphi.vec.data = inv * lff.vec
 
 
-fes = HCurl(mesh, order=2, nograds=True)
+fes = HCurl(mesh, order=1, nograds=True)
 print ("HCurl dofs:", fes.ndof)
 u,v = fes.TnT()
 mu = 4*pi*1e-7
