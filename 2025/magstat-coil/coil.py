@@ -46,10 +46,38 @@ with TaskManager():
     gfphi.vec.data = inv * lff.vec
 
 
+fes = HCurl(mesh, order=2, nograds=True)
+print ("HCurl dofs:", fes.ndof)
+u,v = fes.TnT()
+mu = 4*pi*1e-7
+a = BilinearForm(1/mu*curl(u)*curl(v)*dx+1e-6/mu*u*v*dx)
+pre = preconditioners.BDDC(a)
+f = LinearForm(sigma*grad(gfphi)*v*dx("coil"))
+with TaskManager():
+    a.Assemble()
+    f.Assemble()
+inv = solvers.CGSolver(a.mat, pre)
+gfu = GridFunction(fes)
+with TaskManager():
+    gfu.vec.data = inv * f.vec
+
+gfB = GridFunction(fes)
+gfB = curl(gfu)
+
+gfJ = GridFunction(fes)
+gfJ = -sigma*grad(gfphi)
+
+J = -sigma*grad(gfphi)
+n = specialcf.normal(3)
+region_in_coil = mesh.Boundaries("in") * mesh.Materials("coil")
+
+Iin = Integrate(J*n, mesh, BND, definedon=region_in_coil)
+print("I(in) =", float(Iin))
+
 material_cf = CoefficientFunction([1, 2])  # coil=1, air=2
 vtk = VTKOutput(ma=mesh,
-    coefs=[material_cf, gfphi],
-    names=["MaterialID", "phi"],
+    coefs=[material_cf, gfphi, gfu, gfB, gfJ],
+    names=["MaterialID", "phi", "A", "B", "J"],
     filename="out/mesh",
     legacy=True)
 vtk.Do()
