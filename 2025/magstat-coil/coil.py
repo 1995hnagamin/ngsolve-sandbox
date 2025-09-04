@@ -1,3 +1,5 @@
+# https://docu.ngsolve.org/latest/i-tutorials/wta/coil.html
+
 from netgen.occ import *
 from ngsolve import *
 
@@ -20,7 +22,6 @@ coil.faces.maxh=0.2
 coil.faces.name="coilbnd"
 coil.faces.Max(Z).name="in"
 coil.faces.Min(Z).name="out"
-coil.faces.col=(184/256, 115/256, 51/256)
 coil.mat("coil")
 crosssection = coil.faces.Max(Z).mass
 
@@ -77,7 +78,7 @@ print("I(in) =", float(Iin))
 material_cf = CoefficientFunction([1, 2])  # coil=1, air=2
 vtk = VTKOutput(ma=mesh,
     coefs=[material_cf, gfphi, gfu, gfB, gfJ],
-    names=["MaterialID", "phi", "A", "B", "J"],
+    names=["MaterialID", "electr.scala.pot.", "A", "B", "J"],
     filename="out/mesh",
     legacy=True)
 vtk.Do()
