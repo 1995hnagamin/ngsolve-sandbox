@@ -76,9 +76,18 @@ Iin = Integrate(J*n, mesh, BND, definedon=region_in_coil)
 print("I(in) =", float(Iin))
 
 material_cf = CoefficientFunction([1, 2])  # coil=1, air=2
+
+pairs = [
+    (material_cf, "MaterialID"),
+    (gfphi, "electr.scala.pot."),
+    (gfu, "A"),
+    (gfB, "B"),
+    (gfJ, "J"),
+]
+
 vtk = VTKOutput(ma=mesh,
-    coefs=[material_cf, gfphi, gfu, gfB, gfJ],
-    names=["MaterialID", "electr.scala.pot.", "A", "B", "J"],
+    coefs=[p[0] for p in pairs],
+    names=[p[1] for p in pairs],
     filename="out/mesh",
     legacy=True)
 vtk.Do()
