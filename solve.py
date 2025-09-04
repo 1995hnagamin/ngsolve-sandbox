@@ -89,6 +89,7 @@ vtk = ngs.VTKOutput(mesh,
                    coefs=[gf_current, gf_A_real, gf_A_imag,  gf_B_real, gf_B_imag, gf_J_real, gf_J_imag],
                    names=["current_vector", "A_real", "A_imag", "B_real", "B_imag",
                          "J_real", "J_imag"], 
-                   filename="electromagnetic_fields")
+                   filename="electromagnetic_fields",
+                   legacy=True)
 
 vtk.Do()

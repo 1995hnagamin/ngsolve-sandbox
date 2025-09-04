@@ -1,4 +1,5 @@
 *.msh
 *.step
 *.vol
+*.vtk
 *.vtu
