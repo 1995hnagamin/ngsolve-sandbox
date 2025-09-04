@@ -34,7 +34,7 @@ def Solve(f):
     fes = ngs.HCurl(mesh, order=2, complex=True, dirichlet="Outer", gradientdomains="Aluminum")
     print("free dofs", sum(fes.FreeDofs()))
     u, v = fes.TnT()
-    
+
     a = ngs.BilinearForm(fes, symmetric=True, condense=True)
     a += 1/mu0 * curl(u) * curl(v) * dx
     a += jw * sigma * u * v * dx
@@ -43,7 +43,7 @@ def Solve(f):
     f = ngs.LinearForm(
             -turns/(0.100)*tau_coil*v.Trace() * ds("Coil", bonus_intorder=4) \
             +turns/(0.025 * 0.100)*pot_coil*curl(v) * dx("Coil", bonus_intorder=4))
-    
+
     A = ngs.GridFunction(fes)
     pre = ngs.Preconditioner(a, type="bddc", inverse="sparsecholesky")
     # a.Assemble()
@@ -51,7 +51,7 @@ def Solve(f):
     # inv = solvers.CGSolver(mat=a.mat, pre=pre, printrates='\r', maxiter=200)
     # A.vec[:] = inv*f.vec
     ngs.solvers.BVP(bf=a, lf=f, gf=A, pre=pre, solver=ngs.solvers.CGSolver, solver_flags={"tol" : 1e-12})
-    
+
     B = curl(A)
     J = -jw * sigma * A
     return {"A":A, "B":B, "J":J}
