@@ -8,6 +8,7 @@ ngsolve = "~=6.2"
 numpy = "~=2.3"
 scipy = "~=1.16"
 matplotlib = "*"
+pyyaml = "*"
 
 [dev-packages]
 
