@@ -39,10 +39,30 @@ fesL2 = VectorL2(mesh, order=1, definedon=mesh.Materials("coil"))
 gfJ = GridFunction(fesL2)
 gfJ = -sigma*grad(gfphi)
 
+fes = HCurl(mesh, order=2, nograds=True)
+print ("HCurl dofs:", fes.ndof)
+u,v = fes.TnT()
+mu = 4*pi*1e-7
+a = BilinearForm(1/mu*curl(u)*curl(v)*dx+1e-6/mu*u*v*dx)
+pre = preconditioners.BDDC(a)
+f = LinearForm(sigma*grad(gfphi)*v*dx("coil"))
+with TaskManager():
+    a.Assemble()
+    f.Assemble()
+inv = solvers.CGSolver(a.mat, pre)
+gfu = GridFunction(fes)
+with TaskManager():
+    gfu.vec.data = inv * f.vec
+
+gfB = GridFunction(fes)
+gfB = curl(gfu)
+
+
 pairs = [
     (material_cf, "MaterialID"),
     (gfphi, "electr.scala.pot."),
     (gfJ, "J"),
+    (gfB, "B"),
 ]
 
 vtk = VTKOutput(ma=mesh,
