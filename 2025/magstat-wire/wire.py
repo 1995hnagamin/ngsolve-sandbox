@@ -31,7 +31,6 @@ sigma = 58.7e6
 with TaskManager():
     bfa = BilinearForm(fespot)
     bfa += sigma*grad(phi)*grad(psi)*dx
-    bfa += 1e-6*sigma*phi*psi*dx
     bfa.Assemble()
     inv = bfa.mat.Inverse(freedofs=fespot.FreeDofs(), inverse="sparsecholesky")
 
