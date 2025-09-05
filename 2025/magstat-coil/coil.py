@@ -31,7 +31,7 @@ air = box-coil
 air.mat("air")
 geo = OCCGeometry(Glue([coil,air]))
 with TaskManager():
-    mesh = Mesh(geo.GenerateMesh(meshsize.coarse, maxh=0.005)).Curve(3)
+    mesh = Mesh(geo.GenerateMesh(meshsize.fine, maxh=0.005)).Curve(3)
 
 
 print(mesh.ne, mesh.nv, mesh.GetMaterials(), mesh.GetBoundaries())
