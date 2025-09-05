@@ -15,10 +15,10 @@ c1 = BezierCurve( [(0,0,-0.01), (0,0,0), ps-vs, ps])
 e2 = Segment((0,0,0.04), (0,0,0.06))
 c2 = BezierCurve( [pe, pe+ve, (0,0,0.03), (0,0,0.04)])
 spiral = Wire([e1, c1, heli, c2, e2])
-circ = Face(Wire([Circle((0,0,-0.03), Z, 0.001)]))
+circ = Face(Wire([Circle((0,0,-0.03), Z, 0.0015)]))
 coil = Pipe(spiral, circ)
 
-coil.faces.maxh=0.2
+coil.faces.maxh=0.05
 coil.faces.name="coilbnd"
 coil.faces.Max(Z).name="in"
 coil.faces.Min(Z).name="out"
@@ -31,7 +31,7 @@ air = box-coil
 air.mat("air")
 geo = OCCGeometry(Glue([coil,air]))
 with TaskManager():
-    mesh = Mesh(geo.GenerateMesh(meshsize.coarse, maxh=0.01)).Curve(3)
+    mesh = Mesh(geo.GenerateMesh(meshsize.coarse, maxh=0.005)).Curve(3)
 
 
 print(mesh.ne, mesh.nv, mesh.GetMaterials(), mesh.GetBoundaries())
@@ -52,7 +52,7 @@ with TaskManager():
     gfphi.vec.data = inv * lff.vec
 
 
-fes = HCurl(mesh, order=1, nograds=True)
+fes = HCurl(mesh, order=2, nograds=True)
 print ("HCurl dofs:", fes.ndof)
 u,v = fes.TnT()
 mu = 4*pi*1e-7
