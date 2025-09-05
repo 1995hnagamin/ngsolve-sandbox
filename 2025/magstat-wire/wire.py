@@ -3,10 +3,10 @@ from ngsolve import *
 
 e1 = Segment((0,0,-0.03), (0,0,0.06))
 spiral = Wire([e1])
-circ = Face(Wire([Circle((0,0,-0.03), Z, 0.001)]))
+circ = Face(Wire([Circle((0,0,-0.03), Z, 0.002)]))
 coil = Pipe(spiral, circ)
 
-coil.faces.maxh=0.2
+coil.faces.maxh=0.001
 coil.faces.name="coilbnd"
 coil.faces.Max(Z).name="in"
 coil.faces.Min(Z).name="out"
@@ -19,7 +19,7 @@ air = box-coil
 air.mat("air")
 geo = OCCGeometry(Glue([coil,air]))
 with TaskManager():
-    mesh = Mesh(geo.GenerateMesh(meshsize.coarse, maxh=0.01)).Curve(3)
+    mesh = Mesh(geo.GenerateMesh(meshsize.coarse, maxh=0.005)).Curve(3)
 
 print(mesh.ne, mesh.nv, mesh.GetMaterials(), mesh.GetBoundaries())
 
