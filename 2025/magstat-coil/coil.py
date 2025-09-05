@@ -73,12 +73,6 @@ gfB = curl(gfu)
 gfJ = GridFunction(fes)
 gfJ = -sigma*grad(gfphi)
 
-J = -sigma*grad(gfphi)
-n = specialcf.normal(3)
-region_in_coil = mesh.Boundaries("in") * mesh.Materials("coil")
-
-Iin = Integrate(J*n, mesh, BND, definedon=region_in_coil)
-print("I(in) =", float(Iin))
 
 material_cf = CoefficientFunction([1, 2])  # coil=1, air=2
 
