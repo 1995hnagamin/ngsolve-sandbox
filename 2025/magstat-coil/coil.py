@@ -59,7 +59,7 @@ u,v = fes.TnT()
 mu = 4*pi*1e-7
 a = BilinearForm(1/mu*curl(u)*curl(v)*dx+1e-6/mu*u*v*dx)
 pre = preconditioners.BDDC(a)
-f = LinearForm(sigma*grad(gfphi)*v*dx("coil"))
+f = LinearForm(-sigma*grad(gfphi)*v*dx("coil"))
 with TaskManager():
     a.Assemble()
     f.Assemble()
