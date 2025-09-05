@@ -29,9 +29,16 @@ fespot = H1(mesh, order=2, definedon=mesh.Materials("coil"), dirichlet="out")
 phi,psi = fespot.TnT()
 sigma = 58.7e6
 with TaskManager():
-    bfa = BilinearForm(sigma*grad(phi)*grad(psi)*dx+1e-6*sigma*phi*psi*dx).Assemble()
+    bfa = BilinearForm(fespot)
+    bfa += sigma*grad(phi)*grad(psi)*dx
+    bfa += 1e-6*sigma*phi*psi*dx
+    bfa.Assemble()
     inv = bfa.mat.Inverse(freedofs=fespot.FreeDofs(), inverse="sparsecholesky")
-    lff = LinearForm(1/crosssection*psi*ds("in")).Assemble()
+
+    lff = LinearForm(fespot)
+    lff += 1/crosssection*psi*ds("in")
+    lff.Assemble()
+
     gfphi = GridFunction(fespot)
     gfphi.vec.data = inv * lff.vec
 
