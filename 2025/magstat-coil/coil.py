@@ -9,6 +9,7 @@ ps = heli.start
 vs = heli.start_tangent
 pe = heli.end
 ve = heli.end_tangent
+print(ps, vs, pe, ve)
 
 e1 = Segment((0,0,-0.03), (0,0,-0.01))
 c1 = BezierCurve( [(0,0,-0.01), (0,0,0), ps-vs, ps])
