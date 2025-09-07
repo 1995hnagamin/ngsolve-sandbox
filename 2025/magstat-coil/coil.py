@@ -16,7 +16,7 @@ c1 = BezierCurve( [(0,0,-0.01), (0,0,0), ps-vs, ps])
 e2 = Segment((0,0,0.04), (0,0,0.06))
 c2 = BezierCurve( [pe, pe+ve, (0,0,0.03), (0,0,0.04)])
 spiral = Wire([e1, c1, heli, c2, e2])
-circ = Face(Wire([Circle((0,0,-0.03), Z, 0.0015)]))
+circ = Face(Wire([Circle((0,0,-0.03), Z, 0.001)]))
 coil = Pipe(spiral, circ)
 
 coil.faces.maxh=0.05
@@ -37,7 +37,7 @@ with TaskManager():
 
 print(mesh.ne, mesh.nv, mesh.GetMaterials(), mesh.GetBoundaries())
 
-fespot = H1(mesh, order=2, definedon=mesh.Materials("coil"), dirichlet="out")
+fespot = H1(mesh, order=3, definedon=mesh.Materials("coil"), dirichlet="out")
 phi,psi = fespot.TnT()
 sigma = 58.7e6
 with TaskManager():
