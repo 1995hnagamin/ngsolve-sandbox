@@ -57,7 +57,9 @@ fes = HCurl(mesh, order=2, nograds=True)
 print ("HCurl dofs:", fes.ndof)
 u,v = fes.TnT()
 mu = 4*pi*1e-7
-a = BilinearForm(1/mu*curl(u)*curl(v)*dx+1e-6/mu*u*v*dx)
+a = BilinearForm(fes)
+a += 1/mu*curl(u)*curl(v)*dx
+a += 1e-6/mu*u*v*dx
 pre = preconditioners.BDDC(a)
 f = LinearForm(-sigma*grad(gfphi)*v*dx("coil"))
 with TaskManager():
@@ -88,6 +90,6 @@ pairs = [
 vtk = VTKOutput(ma=mesh,
     coefs=[p[0] for p in pairs],
     names=[p[1] for p in pairs],
-    filename="out/mesh",
+    filename="out/magstat-coil",
     legacy=True)
 vtk.Do()
