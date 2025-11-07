@@ -16,13 +16,14 @@ c1 = BezierCurve( [(0,0,-0.01), (0,0,0), ps-vs, ps])
 e2 = Segment((0,0,0.04), (0,0,0.06))
 c2 = BezierCurve( [pe, pe+ve, (0,0,0.03), (0,0,0.04)])
 spiral = Wire([e1, c1, heli, c2, e2])
-circ = Face(Wire([Circle((0,0,-0.03), Z, 0.0015)]))
+circ = Face(Wire([Circle((0,0,-0.03), Z, 0.001)]))
 coil = Pipe(spiral, circ)
 
-coil.faces.maxh=0.05
+coil.faces.maxh=0.2
 coil.faces.name="coilbnd"
 coil.faces.Max(Z).name="in"
 coil.faces.Min(Z).name="out"
+coil.faces.col=(184/256, 115/256, 51/256)
 coil.mat("coil")
 crosssection = coil.faces.Max(Z).mass
 
@@ -32,7 +33,7 @@ air = box-coil
 air.mat("air")
 geo = OCCGeometry(Glue([coil,air]))
 with TaskManager():
-    mesh = Mesh(geo.GenerateMesh(meshsize.fine, maxh=0.005)).Curve(3)
+    mesh = Mesh(geo.GenerateMesh(meshsize.moderate, maxh=0.01)).Curve(3)
 
 
 print(mesh.ne, mesh.nv, mesh.GetMaterials(), mesh.GetBoundaries())
