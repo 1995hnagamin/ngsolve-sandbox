@@ -25,6 +25,14 @@
             "markers": "python_version >= '3.9'",
             "version": "==4.10.0"
         },
+        "appnope": {
+            "hashes": [
+                "sha256:1de3860566df9caf38f01f86f65e0e13e379af54f9e4bee1e66b48f2efffd1ee",
+                "sha256:502575ee11cd7a28c0205f379b525beefebab9d161b7c964670864014ed7213c"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==0.1.4"
+        },
         "argon2-cffi": {
             "hashes": [
                 "sha256:694ae5cc8a42f4c4e2bf2ca0e64e51e23a040c6a517a85074683d3959e1346c1",
@@ -551,20 +559,6 @@
             "markers": "python_version >= '3.6'",
             "version": "==3.10"
         },
-        "intel-cmplr-lib-ur": {
-            "hashes": [
-                "sha256:497348e3bcb9fa0e079ade2d7cf2c10931e78eb9845285d1b6bb6dcd2764964a",
-                "sha256:ecc6eba009ead8ea819d931107ba11e2b502f5d8ebbd287e4901074a764f9792"
-            ],
-            "version": "==2025.2.1"
-        },
-        "intel-openmp": {
-            "hashes": [
-                "sha256:4656e8e864998db776dbb6d045067f75c227f78c72943e07e15b0d1d65ff45c2",
-                "sha256:ac69973d6c489ec3697bb320ccce0b274de4462f463e5ea0f078abbcbb933e09"
-            ],
-            "version": "==2025.2.1"
-        },
         "ipykernel": {
             "hashes": [
                 "sha256:6abb270161896402e76b91394fcdce5d1be5d45f456671e5080572f8505be39b",
@@ -1011,13 +1005,6 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==3.1.4"
-        },
-        "mkl": {
-            "hashes": [
-                "sha256:974b4e222cc94e8d3b67213a361c8ac25d432cc4fccc5f2f00aa15c4e67cc203",
-                "sha256:b6ec153e4a073421dbb52ef99c7be97e66cde0272e4a1e3569b090b6f0130253"
-            ],
-            "version": "==2025.2.0"
         },
         "nbclient": {
             "hashes": [
@@ -1904,20 +1891,6 @@
             ],
             "version": "==0.6.3"
         },
-        "tbb": {
-            "hashes": [
-                "sha256:522189f3e370a6b9c92b8a7fbdecf3633f7c53f0ea4eb8d6891a7f5f00c78099",
-                "sha256:acbce7632d4d7acc6bdfe9849a57ab1624490198699eb16ea63243cfb4fd4cfa"
-            ],
-            "version": "==2022.2.0"
-        },
-        "tcmlib": {
-            "hashes": [
-                "sha256:ab24f73c52b224cb744a0c0c28fcef8e51aec3c88aa6b39202c149495d6d2ea0",
-                "sha256:b2a2b68c100cc2a6163d394353b3013ab2479e70300b9bc1cb7f7822bcc38a40"
-            ],
-            "version": "==1.4.0"
-        },
         "terminado": {
             "hashes": [
                 "sha256:a4468e1b37bb318f8a86514f65814e1afc977cf29b3992a4500d9dd305dcceb0",
@@ -1975,13 +1948,6 @@
             ],
             "markers": "python_version >= '3.9'",
             "version": "==4.15.0"
-        },
-        "umf": {
-            "hashes": [
-                "sha256:24b2ec23b6716f39dde53d1b29f8de1ec73c33a1e3b137dae9caf0caeaf50201",
-                "sha256:9f2a6be0de4202fdcdddf9045c54ae6eb4c4afaec38e1871a603db3f72d36bab"
-            ],
-            "version": "==0.11.0"
         },
         "uri-template": {
             "hashes": [
