@@ -1,4 +1,5 @@
 *.mesh
 *.msh
+*.png
 *.pvsm
 *.vtk

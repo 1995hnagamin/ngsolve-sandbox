@@ -12,14 +12,16 @@ ve = heli.end_tangent
 print(ps, vs, pe, ve)
 
 e1 = Segment((0,0,-0.03), (0,0,-0.01))
-c1 = BezierCurve( [(0,0,-0.01), (0,0,0), ps-vs, ps])
+normal = Pnt(0,0,-0.01) - ps
+c1 = BezierCurve( [(0,0,-0.01), (0,0,0), ps-vs+0.4*normal, ps-0.4*vs, ps])
 e2 = Segment((0,0,0.04), (0,0,0.06))
-c2 = BezierCurve( [pe, pe+ve, (0,0,0.03), (0,0,0.04)])
+normal = Pnt(0,0,0.04) - pe
+c2 = BezierCurve( [pe, pe+0.4*ve, pe+ve+0.4*normal, (0,0,0.03), (0,0,0.04)])
 spiral = Wire([e1, c1, heli, c2, e2])
 circ = Face(Wire([Circle((0,0,-0.03), Z, 0.001)]))
 coil = Pipe(spiral, circ)
 
-coil.faces.maxh=0.2
+coil.faces.maxh=0.8e-3
 coil.faces.name="coilbnd"
 coil.faces.Max(Z).name="in"
 coil.faces.Min(Z).name="out"
@@ -33,7 +35,7 @@ air = box-coil
 air.mat("air")
 geo = OCCGeometry(Glue([coil,air]))
 with TaskManager():
-    mesh = Mesh(geo.GenerateMesh(meshsize.moderate, maxh=0.01)).Curve(3)
+    mesh = Mesh(geo.GenerateMesh(meshsize.moderate, maxh=0.2)).Curve(3)
 
 
 print(mesh.ne, mesh.nv, mesh.GetMaterials(), mesh.GetBoundaries())
@@ -44,7 +46,7 @@ sigma = 58.7e6
 with TaskManager():
     bfa = BilinearForm(fespot)
     bfa += sigma*grad(phi)*grad(psi)*dx
-    # bfa += 1e-6*sigma*phi*psi*dx
+    bfa += 1e-6*sigma*phi*psi*dx
     bfa.Assemble()
     inv = bfa.mat.Inverse(freedofs=fespot.FreeDofs(), inverse="sparsecholesky")
     lff = LinearForm(fespot)
